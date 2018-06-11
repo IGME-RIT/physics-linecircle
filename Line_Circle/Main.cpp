@@ -60,6 +60,15 @@ bool TestIntersection()
 	// Then we determine if that point lies outside or inside the circle.
 	// if the point satisfies all these conditions then the line and the circle are colliding.
 
+	//see if any of the end points of the line are inside the circle
+	float dis = glm::distance(glm::vec2(0.0f, 0.0f), line.point1);
+	if (dis < radius)
+		return true;
+
+	dis = glm::distance(glm::vec2(0.0f, 0.0f), line.point2);
+	if (dis < radius)
+		return true;
+
 	glm::vec2 d = line.point2 - line.point1;								
 	glm::vec2 lc = glm::vec2(0.0f, 0.0f) - line.point1;
 	glm::vec2 projectionVector = glm::normalize(d);
@@ -67,9 +76,16 @@ bool TestIntersection()
 
  	glm::vec2 nearestPoint = line.point1 + projectionVector;
 
-	float dis = glm::distance(glm::vec2(0.0f, 0.0f), nearestPoint);
+	dis = glm::distance(glm::vec2(0.0f, 0.0f), nearestPoint);
 	
-	return ((dis < radius));											// is the point inside the circle ?
+	if (line.getIsLine())
+	{
+		return ((dis < radius));										// is the point inside the circle ?
+	}
+
+	return ((dis < radius)											// is the point inside the circle ?
+		&& (glm::length(projectionVector) <= glm::length(d))		// does the point lie on the line segment in one direction?
+		&& (glm::dot(projectionVector, d) >= 0));					// does the point lie on the line segment in the other direction?
 }
 
 // This runs once every physics timestep.

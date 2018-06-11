@@ -246,6 +246,10 @@ void setupLine()
 	//Set the starting points of the line segment
 	line.point1 = glm::vec2(-0.5f, 0.0f);
 	line.point2 = glm::vec2(0.5f, 0.0f);
+
+
+	//Change the value of bool here to 
+	line.setIsLine(false);
 }
 
 // Initialization code

@@ -52,6 +52,16 @@ void Line::drawLine()
 	glVertex3f(point1.x, point1.y, 0.0f);
 	glVertex3f(point2.x, point2.y, 0.0f);
 
+	if (isLine)
+	{
+		extendLineToInfinity();
+	}
+	
+	glEnd();
+}
+
+void Line::extendLineToInfinity()
+{
 	// This part draws the green line which represents the entire line which extends to infinity
 	float m;													// Slope of the line	(y = mx +c)
 	m = (point2.y - point1.y) / (point2.x - point1.x);		// m = (y2-y1)/(x2-x1)
@@ -59,7 +69,11 @@ void Line::drawLine()
 	glColor3f(0.0f, 1.0f, 0.0f);								// Change the color to Green 
 	glVertex3f(10.0f, (m*10.0f) + c, 0.0f);					// vertex x value = 10
 	glVertex3f(-10.0f, (m*(-10.0f)) + c, 0.0f);					// vertex x value = -10
-	glEnd();
+}
+
+void Line::setIsLine(bool _isLine)
+{
+	isLine = _isLine;
 }
 
 #endif // !_LINE_CPP

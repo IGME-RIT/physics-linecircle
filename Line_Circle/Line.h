@@ -44,6 +44,15 @@ public:
 
 	Line();
 	void drawLine();
+	void extendLineToInfinity();
+	void setIsLine(bool _isLine);
+	bool getIsLine()
+	{
+		return isLine;
+	}
+
+private:
+	bool isLine = true;
 };
 
 #endif // !_LINE_H
