@@ -248,8 +248,10 @@ void setupLine()
 	line.point2 = glm::vec2(0.5f, 0.0f);
 
 
-	//Change the value of bool here to 
-	line.setIsLine(false);
+	// Change the value of bool here to change to switch between line and line segment
+	// true -> line
+	// false -> line segment
+	line.setIsLine(true);
 }
 
 // Initialization code
